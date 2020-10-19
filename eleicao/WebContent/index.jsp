@@ -48,7 +48,6 @@
 		<a href="resultado.jsp">Resultado</a>
 	</div>
 </body>
-</html>
 <script>
 	function inserir(valor) {
 		var valor1 = document.getElementById("campo1").value;
@@ -95,4 +94,6 @@
 		}
 	}
 </script>
+</html>
+
 

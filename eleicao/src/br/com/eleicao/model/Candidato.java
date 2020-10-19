@@ -38,4 +38,11 @@ public class Candidato {
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
+
+	@Override
+	public String toString() {
+		return "Candidato [id=" + id + ", nome=" + nome + ", numero=" + numero + "]";
+	}
+	
+	
 }

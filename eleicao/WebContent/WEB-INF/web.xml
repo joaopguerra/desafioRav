@@ -4,4 +4,8 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+  <servlet-name>CandidatoServlet</servlet-name>
+  <servlet-class>br.com.eleicao.servlet.CandidatoServlet</servlet-class>
+  </servlet>  
 </web-app>

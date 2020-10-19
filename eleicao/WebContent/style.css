@@ -95,3 +95,12 @@ b{
 .titulo {
 	text-align: center;
 }
+.tabela {
+  border: 1px solid black;
+}
+.tabela th {
+  border: 1px solid black;
+}
+.tabela td {
+  border: 1px solid black;
+}

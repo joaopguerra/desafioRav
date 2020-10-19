@@ -19,7 +19,7 @@ public class Testes {
 	public static void testeInsert() throws SQLException {
 		Candidato cand = new Candidato();
 		cand.setNome("Candidato B");
-		cand.setNumero("39");
+		cand.setNumero("99");
 
 		CandidatoDao candDao = new CandidatoDao();
 		candDao.insert(cand);
@@ -37,10 +37,10 @@ public class Testes {
 
 	public static void testeDelete() throws SQLException {
 		Candidato cand = new Candidato();
-		cand.setId(4);
+		cand.setNome("Joao");
 
 		CandidatoDao candDao = new CandidatoDao();
-		candDao.delete(cand);
+		candDao.delete(cand.getNome());
 
 	}
 

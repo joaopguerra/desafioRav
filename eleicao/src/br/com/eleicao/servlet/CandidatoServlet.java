@@ -1,7 +1,6 @@
 package br.com.eleicao.servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,38 +14,55 @@ import br.com.eleicao.model.Candidato;
 
 @WebServlet("/salvarCandidato")
 public class CandidatoServlet extends HttpServlet {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private CandidatoDao candDao = new CandidatoDao();
-       
-    
-    public CandidatoServlet() {
-        super();
-    }
-    
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());		
-		
+	Candidato cand = new Candidato();
+
+	public CandidatoServlet() {
+		super();
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		try {
+			String acao = request.getParameter("acao");
+			String nome = request.getParameter("nome");
+
+			if (acao.equals("delete")) {
+				candDao.delete(nome);
+				RequestDispatcher view = request.getRequestDispatcher("cadastro.jsp");
+				request.setAttribute("candidatos", candDao.listar());
+				view.forward(request, response);
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		String nome = request.getParameter("nome");
 		String numero = request.getParameter("numero");
 
 		Candidato cand = new Candidato();
-		cand.setNome(nome);		
+		cand.setNome(nome);
 		cand.setNumero(numero);
 		
-		try {
-			candDao.insert(cand);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
+		candDao.insert(cand);
 		
-		RequestDispatcher view = request.getRequestDispatcher("/cadastro.jsp");
-		view.forward(request, response);
+		try {
+			RequestDispatcher view = request.getRequestDispatcher("cadastro.jsp");
+			request.setAttribute("candidatos", candDao.listar());
+			view.forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

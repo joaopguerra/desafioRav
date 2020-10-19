@@ -1,0 +1,89 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  background: #fff;
+  margin: 10px;
+  padding: 10px;
+  width: 70%;
+  height: 100vh;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.wrapper h2 {
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  margin: 10px 0;
+}
+
+.datatable-head th {
+  font-weight: 600;
+  text-align: justify;
+}
+
+form table tr td input {
+  border-radius: 4px;
+  width: 250px;
+}
+
+form button {
+  margin-top: 10px;
+  border-radius: 4px;
+  background: #006699;
+  color: #ffffff;
+  width: 100px;
+}
+
+.presentation-data {
+  display: flex;
+  justify-content: center;
+}
+
+.presentation-data .tabela tr td a {
+  font-family: verdana, arial, sans-serif;
+  font-size: 10pt;
+  font-weight: bold;
+  padding: 4px;
+  color: #006699;
+  text-decoration: none;
+}
+
+.presentation-data .tabela tr td {
+	margin: 10px;
+	width: 5%;
+}
+
+
+.presentation-data .tabela tr td a::visited {
+  border-top: 1px solid #cccccc;
+  border-bottom: 2px solid #666666;
+  border-left: 1px solid #cccccc;
+  border-right: 2px solid #666666;
+}
+
+.presentation-data .tabela tr td a::hover {
+  border-bottom: 1px solid #cccccc;
+  border-top: 2px solid #666666;
+  border-right: 1px solid #cccccc;
+  border-left: 2px solid #666666;
+}
