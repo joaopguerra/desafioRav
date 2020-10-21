@@ -69,7 +69,7 @@ public class CandidatoServlet extends HttpServlet {
 		String numero = request.getParameter("numero");
 
 		Candidato cand = new Candidato();
-		cand.setId(id != null && !id.isEmpty() ? Integer.parseInt(id) : null);
+		cand.setId(id != null && !id.isEmpty() ? Integer.parseInt(id) : 0);
 		cand.setNome(nome);
 		cand.setNumero(numero);
 

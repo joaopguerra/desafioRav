@@ -38,7 +38,7 @@ form {
 
 .datatable-head th {
   font-weight: 600;
-  text-align: inherit;
+  text-align: justify;
 }
 
 form table tr td input {

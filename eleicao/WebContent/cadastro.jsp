@@ -16,7 +16,7 @@
 				<table class="datatable">
 					<tr>
 						<td>Id:</td>
-						<td><input type="text" readonly="readonly" id="id"  value="${candidato.id}"></td>
+						<td><input type="text" readonly="readonly" id="id" name="id" value="${candidato.id}"></td>
 					</tr>
 					<tr>
 						<td>Nome:</td>
@@ -38,13 +38,13 @@
 						<th>Nome</th>
 						<th>Numero</th>
 					</tr>
-					<c:forEach items="${candidatos}" var="candidatos">
+					<c:forEach items="${candidatos}" var="candidato">
 						<tr>
-							<td>${candidatos.id}</td>
-							<td>${candidatos.nome}</td>
-							<td>${candidatos.numero}</td>
-							<td><a href="salvarCandidato?acao=update&id=${candidatos.id}">Editar</a></td>
-							<td><a href="salvarCandidato?acao=delete&nome=${candidatos.nome}">Deletar</a></td>
+							<td>${candidato.id}</td>
+							<td>${candidato.nome}</td>
+							<td>${candidato.numero}</td>
+							<td><a href="salvarCandidato?acao=update&id=${candidato.id}">Editar</a></td>
+							<td><a href="salvarCandidato?acao=delete&nome=${candidato.nome}">Deletar</a></td>
 						</tr>						
 					</c:forEach>
 				</table>

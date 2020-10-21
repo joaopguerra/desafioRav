@@ -74,6 +74,7 @@
 			if (sessionStorage.getItem(candidado) !== null) {
 				votos = parseInt(sessionStorage.getItem(candidado)) + 1;
 				sessionStorage.setItem(candidado, votos);
+				sessionStorage.setItem()
 			} else {
 				sessionStorage.setItem(candidado, 1);
 
