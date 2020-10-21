@@ -26,7 +26,8 @@ public class CandidatoServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Served at: ").append(request.getContextPath());		
+		
 
 		try {
 			String acao = request.getParameter("acao");
@@ -37,7 +38,23 @@ public class CandidatoServlet extends HttpServlet {
 				RequestDispatcher view = request.getRequestDispatcher("cadastro.jsp");
 				request.setAttribute("candidatos", candDao.listar());
 				view.forward(request, response);
+			}
+			
+			else if (acao.equals("update")) {
+					String id = request.getParameter("id");
+					Candidato cand = candDao.consultar(Integer.parseInt(id));
+					
+					RequestDispatcher view = request.getRequestDispatcher("cadastro.jsp");
+					request.setAttribute("candidato", cand);
+					request.setAttribute("candidatos", candDao.listar());
+					view.forward(request, response);
+				 
 			} 
+			else if (acao.equalsIgnoreCase("listartodos")) {
+				RequestDispatcher view = request.getRequestDispatcher("cadastro.jsp");
+				request.setAttribute("candidatos", candDao.listar());
+				view.forward(request, response);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -47,15 +64,21 @@ public class CandidatoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		String id = request.getParameter("id");
 		String nome = request.getParameter("nome");
 		String numero = request.getParameter("numero");
 
 		Candidato cand = new Candidato();
+		cand.setId(id != null && !id.isEmpty() ? Integer.parseInt(id) : null);
 		cand.setNome(nome);
 		cand.setNumero(numero);
-		
-		candDao.insert(cand);
-		
+
+		if (id == null || id.isEmpty()) {
+			candDao.insert(cand);
+		} else {
+			candDao.update(cand);
+		}
+
 		try {
 			RequestDispatcher view = request.getRequestDispatcher("cadastro.jsp");
 			request.setAttribute("candidatos", candDao.listar());

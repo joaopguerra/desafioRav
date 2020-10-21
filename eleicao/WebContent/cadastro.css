@@ -38,7 +38,7 @@ form {
 
 .datatable-head th {
   font-weight: 600;
-  text-align: justify;
+  text-align: inherit;
 }
 
 form table tr td input {
@@ -62,15 +62,15 @@ form button {
 .presentation-data .tabela tr td a {
   font-family: verdana, arial, sans-serif;
   font-size: 10pt;
-  font-weight: bold;
+  font-weight: bold;  
   padding: 4px;
   color: #006699;
   text-decoration: none;
 }
 
-.presentation-data .tabela tr td {
-	margin: 10px;
-	width: 5%;
+.presentation-data .tabela  {
+	margin: 100px;
+	width: 50%;
 }
 
 

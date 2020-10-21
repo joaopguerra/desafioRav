@@ -32,9 +32,9 @@ public class CandidatoDao {
 	}
 
 	public void update(Candidato candidato) {
-		String sql = "UPDATE candidatos SET nome = ?, numero = ? WHERE id = ?";
 
 		try {
+			String sql = "UPDATE candidatos SET nome = ?, numero = ? WHERE id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, candidato.getNome());
 			ps.setString(2, candidato.getNumero());
@@ -46,25 +46,37 @@ public class CandidatoDao {
 
 		} catch (SQLException e) {
 			System.out.println("Erro " + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
 	/*
-	public void delete(int id) {
-		String sql = "DELETE FROM candidatos WHERE id = ?";
+	 * public void update(Candidato candidato) { String sql =
+	 * "UPDATE candidatos SET nome = ?, numero = ? WHERE id = ?";
+	 * 
+	 * try { PreparedStatement ps = conn.prepareStatement(sql); ps.setString(1,
+	 * candidato.getNome()); ps.setString(2, candidato.getNumero()); ps.setInt(3,
+	 * candidato.getId());
+	 * 
+	 * ps.executeUpdate();
+	 * 
+	 * System.out.println("Alterado com sucesso!");
+	 * 
+	 * } catch (SQLException e) { System.out.println("Erro " + e.getMessage()); } }
+	 */
 
-		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, id);
-			ps.executeUpdate();
+	/*
+	 * public void delete(int id) { String sql =
+	 * "DELETE FROM candidatos WHERE id = ?";
+	 * 
+	 * try { PreparedStatement ps = conn.prepareStatement(sql); ps.setInt(1, id);
+	 * ps.executeUpdate();
+	 * 
+	 * System.out.println("Deletado com sucesso!");
+	 * 
+	 * } catch (SQLException e) { System.out.println("Erro " + e.getMessage()); } }
+	 */
 
-			System.out.println("Deletado com sucesso!");
-
-		} catch (SQLException e) {
-			System.out.println("Erro " + e.getMessage());
-		}
-	}*/
-	
 	public void delete(String nome) {
 		String sql = "DELETE FROM candidatos WHERE nome = '" + nome + "'";
 
@@ -80,42 +92,69 @@ public class CandidatoDao {
 	}
 
 	public List<Candidato> listar() throws Exception {
-		
+
 		List<Candidato> lista = new ArrayList<Candidato>();
 
 		String sql = "SELECT * FROM candidatos";
 
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+
+			Candidato cand = new Candidato();
+			cand.setId(rs.getInt("id"));
+			cand.setNome(rs.getString("nome"));
+			cand.setNumero(rs.getString("numero"));
+
+			lista.add(cand);
+		}
+		return lista;
+	}
+	
+	public Candidato consultar(Integer id) {
+		Candidato cand = null;
+		String sql = "SELECT * FROM candidatos WHERE id= ?";
+
+		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+
 			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				
+
+			if (rs.next()) {
+				cand = new Candidato();
+				cand.setId(rs.getInt("id"));
+				cand.setNome(rs.getString("nome"));
+				cand.setNumero(rs.getString("numero"));
+			}
+			System.out.println("Encontrado com sucesso!");
+
+		} catch (SQLException e) {
+			System.out.println("Erro " + e.getMessage());
+		}
+
+		return cand;
+	} 
+	
+	/*
+	public Candidato consultar(String id) throws Exception {
+		
+		String sql = "SELECT * FROM candidatos WHERE id='" + id + "'";
+
+		
+			PreparedStatement ps = conn.prepareStatement(sql);	
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
 				Candidato cand = new Candidato();
 				cand.setId(rs.getInt("id"));
 				cand.setNome(rs.getString("nome"));
 				cand.setNumero(rs.getString("numero"));
-
-				lista.add(cand);
-			}		
-		return lista;
-	}
-	
-	public Candidato consultar (String id) throws Exception {
-		
-		String sql = "SELECT * FROM candidatos where id='" + id + "' ";
-		PreparedStatement ps = conn.prepareStatement(sql);
-		ResultSet rs = ps.executeQuery();
-		
-		if (rs.next()) {
-			Candidato cand = new Candidato();
-			cand.setId(rs.getInt("id"));
-			cand.setNome("nome");
-			cand.setNumero("numero");
-			return cand;
-		}
-		
-		else {
-			return null;
-		}
-		
-	}
+				return cand;
+			}
+			System.out.println("Encontrado com sucesso!");
+		 
+		return null;
+	} 
+	*/
 }

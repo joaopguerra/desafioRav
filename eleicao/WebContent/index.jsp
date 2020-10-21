@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,7 @@
 </head>
 <body>
 	<div class="container">
-		<div class="branco">
+		<div class="branco">		
 			<div class="cinzaClaro">
 				<p>Número:</p>
 				<form action="">
@@ -18,6 +19,7 @@
 						readonly="readonly" /> <input size="1" id="campo2" value=""
 						maxlength="1" type="text" readonly="readonly" />
 				</form>
+
 			</div>
 			<div class="cinzaEscuro">
 				<b>JUSTIÇA<br>ELEITORAL
@@ -41,59 +43,47 @@
 				</div>
 				<div>
 					<button class="cadastrar  click"
-						onclick="window.location.href='cadastro.jsp'">CADASTRAR</button>
+						onclick="window.location.href='salvarCandidato?acao=listartodos'">CADASTRAR</button>
 				</div>
 			</div>
 		</div>
 		<a href="resultado.jsp">Resultado</a>
 	</div>
-</body>
-<script>
-	function inserir(valor) {
-		var valor1 = document.getElementById("campo1").value;
-		var valor2 = document.getElementById("campo2").value;
+	<script>
+		function inserir(valor) {
+			var valor1 = document.getElementById("campo1").value;
+			var valor2 = document.getElementById("campo2").value;
 
-		if (valor1 == "") {
-			document.getElementById("campo1").value = valor;
-		} else if (valor2 == "") {
-			document.getElementById("campo2").value = valor;
-		}
-	}
-
-	function corrige() {
-		document.getElementById("campo1").value = "";
-		document.getElementById("campo2").value = "";
-	}
-
-	function votar() {
-
-		var valor1 = parseInt(document.getElementById("campo1").value);
-		var valor2 = parseInt(document.getElementById("campo2").value);
-		var candidado = (valor1 * 10) + valor2;
-		if (sessionStorage.getItem(candidado) !== null) {
-			votos = parseInt(sessionStorage.getItem(candidado)) + 1;
-			sessionStorage.setItem(candidado, votos);
-		} else {
-			sessionStorage.setItem(candidado, 1);
-
-		}
-		alert("Confirmado voto no candidato " + candidado)
-		document.getElementById("campo1").value = "";
-		document.getElementById("campo2").value = "";
-	}
-
-	function resultado() {
-		document.getElementById("resultado").innerHTML = ""
-		for (i = 0; i < 100; i++) {
-			if (sessionStorage.getItem(i) !== null) {
-				//alert(i);
-				document.getElementById("resultado").innerHTML += "Cantidado "
-						+ i + " tem " + sessionStorage.getItem(i)
-						+ " votos<br/>";
+			if (valor1 == "") {
+				document.getElementById("campo1").value = valor;
+			} else if (valor2 == "") {
+				document.getElementById("campo2").value = valor;
 			}
 		}
-	}
-</script>
+
+		function corrige() {
+			document.getElementById("campo1").value = "";
+			document.getElementById("campo2").value = "";
+		}
+
+		function votar() {
+
+			var valor1 = parseInt(document.getElementById("campo1").value);
+			var valor2 = parseInt(document.getElementById("campo2").value);
+			var candidado = (valor1 * 10) + valor2;
+			if (sessionStorage.getItem(candidado) !== null) {
+				votos = parseInt(sessionStorage.getItem(candidado)) + 1;
+				sessionStorage.setItem(candidado, votos);
+			} else {
+				sessionStorage.setItem(candidado, 1);
+
+			}
+			alert("Confirmado voto no candidato " + candidado)
+			document.getElementById("campo1").value = "";
+			document.getElementById("campo2").value = "";
+		}
+	</script>
+</body>
 </html>
 
 

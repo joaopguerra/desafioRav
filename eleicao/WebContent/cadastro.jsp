@@ -16,18 +16,18 @@
 				<table class="datatable">
 					<tr>
 						<td>Id:</td>
-						<td><input type="text" readonly="readonly" id="id"></td>
+						<td><input type="text" readonly="readonly" id="id"  value="${candidato.id}"></td>
 					</tr>
 					<tr>
 						<td>Nome:</td>
-						<td><input type="text" id="nome" name="nome"></td>
+						<td><input type="text" id="nome" name="nome" value="${candidato.nome}"></td>
 					</tr>
 					<tr>
 						<td>Número:</td>
-						<td><input type="number" id="numero" name="numero"></td>
+						<td><input type="number" id="numero" name="numero" value="${candidato.numero}"></td>
 					</tr>
 				</table>
-				<button type="submit">Cadastrar</button>
+				<button type="submit">Salvar</button>
 				<button type="button" onclick="window.location.href='index.jsp'">Voltar</button>
 			</form>
 			<div class="presentation-data">
@@ -43,9 +43,9 @@
 							<td>${candidatos.id}</td>
 							<td>${candidatos.nome}</td>
 							<td>${candidatos.numero}</td>
-							<td><a href="salvarCandidato?acao=update&nome=${candidatos.nome}">Editar</a></td>
+							<td><a href="salvarCandidato?acao=update&id=${candidatos.id}">Editar</a></td>
 							<td><a href="salvarCandidato?acao=delete&nome=${candidatos.nome}">Deletar</a></td>
-						</tr>
+						</tr>						
 					</c:forEach>
 				</table>
 			</div>

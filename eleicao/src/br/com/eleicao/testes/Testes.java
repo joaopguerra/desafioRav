@@ -13,6 +13,7 @@ public class Testes {
 		// testeInsert();
 		// testeUpdate();
 		// testeDelete();
+		 testeConsultar();
 
 	}
 
@@ -27,9 +28,9 @@ public class Testes {
 
 	public static void testeUpdate() throws SQLException {
 		Candidato cand = new Candidato();
-		cand.setNome("Candidato A2");
+		cand.setNome("Candidato A55");
 		cand.setNumero("55");
-		cand.setId(3);
+		cand.setId(12);
 
 		CandidatoDao candDao = new CandidatoDao();
 		candDao.update(cand);
@@ -41,6 +42,14 @@ public class Testes {
 
 		CandidatoDao candDao = new CandidatoDao();
 		candDao.delete(cand.getNome());
+
+	}
+	
+	public static void testeConsultar() throws SQLException {
+		Candidato cand = new Candidato();
+		cand.setNome("Alex");
+
+		System.out.println(cand);
 
 	}
 
