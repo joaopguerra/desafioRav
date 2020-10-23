@@ -7,11 +7,15 @@
 <title>ELEIÇÕES 2020</title>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="style.css">
+<script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+	<div>	
+			
+	</div>
 	<div class="container">
-		<div class="branco">		
+		<div class="branco">
 			<div class="cinzaClaro">
 				<p>Número:</p>
 				<form action="">
@@ -39,15 +43,15 @@
 				<div class="teclado2">
 					<button class="branco  click">BRANCO</button>
 					<button class="laranja  click" onclick="corrige()">CORRIGE</button>
-					<button class="verde" onclick="votar()">CONFIRMA</button>
+					<button class="verde" id="btnVotar">CONFIRMA</button>
 				</div>
 				<div>
 					<button class="cadastrar  click"
 						onclick="window.location.href='salvarCandidato?acao=listartodos'">CADASTRAR</button>
 				</div>
 			</div>
-		</div>
-		<a href="resultado.jsp">Resultado</a>
+		</div>	
+		<button onclick="window.location.href='resultado.jsp'">Resultado</button>	
 	</div>
 	<script>
 		function inserir(valor) {
@@ -66,23 +70,36 @@
 			document.getElementById("campo2").value = "";
 		}
 
-		function votar() {
+		$( "#btnVotar" ).click(function() {
+			
+			const valor1 = parseInt($("#campo1").val());
+			const valor2 = parseInt($("#campo2").val());
+			const numeroCandidato = (valor1 * 10) + valor2;
 
-			var valor1 = parseInt(document.getElementById("campo1").value);
-			var valor2 = parseInt(document.getElementById("campo2").value);
-			var candidado = (valor1 * 10) + valor2;
-			if (sessionStorage.getItem(candidado) !== null) {
-				votos = parseInt(sessionStorage.getItem(candidado)) + 1;
-				sessionStorage.setItem(candidado, votos);
-				sessionStorage.setItem()
-			} else {
-				sessionStorage.setItem(candidado, 1);
-
-			}
-			alert("Confirmado voto no candidato " + candidado)
-			document.getElementById("campo1").value = "";
-			document.getElementById("campo2").value = "";
-		}
+			$.ajax({
+				url: "/eleicao/consultaCandidato?numeroCandidato=" + numeroCandidato,
+				type : "GET",
+				success: function(nomeDoCandidato){
+					if (nomeDoCandidato !== "") {
+						alert("Candidato: " + nomeDoCandidato);
+						document.getElementById("campo1").value = "";
+						document.getElementById("campo2").value = "";
+						let votos = 0;
+						if (sessionStorage.getItem(nomeDoCandidato) !== null) {
+							votos = parseInt(sessionStorage.getItem(nomeDoCandidato)) + 1;
+							sessionStorage.setItem(nomeDoCandidato, votos);
+						} else {
+							sessionStorage.setItem(nomeDoCandidato, 1);
+						}
+					} else {
+						alert("Candidato nao existe");
+					}
+				},
+				error:  function(data, status, er){
+					alert(data+"_"+status+"_"+er);
+				}
+			});
+		});
 	</script>
 </body>
 </html>

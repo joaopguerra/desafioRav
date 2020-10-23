@@ -136,10 +136,10 @@ public class CandidatoDao {
 		return cand;
 	} 
 	
-	/*
-	public Candidato consultar(String id) throws Exception {
+	
+	public Candidato consultarPorNumero(String numero) throws Exception {
 		
-		String sql = "SELECT * FROM candidatos WHERE id='" + id + "'";
+		String sql = "SELECT * FROM candidatos WHERE numero='" + numero + "'";
 
 		
 			PreparedStatement ps = conn.prepareStatement(sql);	
@@ -156,5 +156,5 @@ public class CandidatoDao {
 		 
 		return null;
 	} 
-	*/
+	
 }

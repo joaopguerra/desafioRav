@@ -82,8 +82,10 @@ public class CandidatoServlet extends HttpServlet {
 		try {
 			RequestDispatcher view = request.getRequestDispatcher("cadastro.jsp");
 			request.setAttribute("candidatos", candDao.listar());
-			view.forward(request, response);
-		} catch (Exception e) {
+			view.forward(request, response);		
+			
+		} 
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

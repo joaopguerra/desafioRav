@@ -16,11 +16,12 @@
 <script>
 	function resultado() {
 		document.getElementById("resultado").innerHTML = ""
-		for (i = 0; i < 100; i++) {
-			if (sessionStorage.getItem(i) !== null) {
-				//alert(i);
+		for (var i = 0; i < sessionStorage.length; i++) {
+			const nomeDoCandidato = sessionStorage.key(i);
+			if (nomeDoCandidato !== null) {
 				document.getElementById("resultado").innerHTML += "Candidato "
-						+ i + " tem " + sessionStorage.getItem(i)
+						+ nomeDoCandidato + " tem "
+						+ sessionStorage.getItem(nomeDoCandidato)
 						+ " votos<br/>";
 			}
 		}
